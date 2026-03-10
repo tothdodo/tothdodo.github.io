@@ -3128,13 +3128,13 @@ header.major>.date:after {
 	right: 0;
 }
 
-@media screen and (max-width: 980px) {
+/* @media screen and (max-width: 980px) {
 
 	header {
 		display: none;
 	}
 
-}
+} */
 
 @media screen and (max-width: 736px) {
 
