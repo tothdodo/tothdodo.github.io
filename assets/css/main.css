@@ -2720,6 +2720,18 @@ input[type="radio"]:focus+label:before {
 
 /* Image */
 
+.profile-image {
+	width: 450px;
+	max-width: 100%;
+	border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+	.profile-image {
+		width: 300px;
+	}
+}
+
 .image {
 	border: 0;
 	display: inline-block;
@@ -3118,7 +3130,7 @@ header.major>.date:after {
 
 @media screen and (max-width: 980px) {
 
-	header br {
+	header {
 		display: none;
 	}
 
@@ -3600,9 +3612,9 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 		min-height: 90vh;
 	}
 
-	#intro p br {
+	/* #intro p br {
 		display: none;
-	}
+	} */
 
 	#intro+#header {
 		margin-top: -14rem;
@@ -3903,6 +3915,14 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	-ms-flex-shrink: 0;
 	flex-shrink: 0;
 	margin-bottom: 0;
+}
+
+@media screen and (max-width: 980px) {
+
+	#nav {
+		display: none;
+	}
+
 }
 
 /* Main */
