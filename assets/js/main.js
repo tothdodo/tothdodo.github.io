@@ -12,7 +12,6 @@
 		// 2. Set the Active Navigation Class
 		$('#nav .links li').removeClass('active');
 		$('#nav .links li a').each(function () {
-			// Split the href by '#' to only compare the HTML file name
 			var targetPage = $(this).attr('href').split('#')[0];
 
 			if (targetPage === currentPath) {
@@ -20,37 +19,13 @@
 			}
 		});
 
-		// --- NEW: Helper function to determine the scroll target ---
-		function getScrollTarget(hash) {
-			var target = $(hash);
-			// If the target doesn't exist on this page, and we are looking for #nav, fallback to #main
-			if (!target.length && hash === '#nav') {
-				target = $('#main');
-			}
-			return target;
-		}
-
-		// 3. Smooth scroll on Cross-Page Load
 		if (window.location.hash) {
-			// Wait for full page load (images, CSS) so offset().top is 100% accurate
 			$(window).on('load', function () {
-				var target = getScrollTarget(window.location.hash);
-
-				// --- DEBUGGING ---
-				console.log("1. The URL Hash is:", window.location.hash);
-				console.log("2. Did we find a target?:", target.length > 0 ? "Yes, ID: " + target.attr('id') : "No");
+				var target = $('#content');
 				if (target.length) {
-					console.log("3. Target's distance from top is:", target.offset().top);
-				}
-				// -----------------
-
-				if (target.length) {
-					// A slightly longer delay (50ms) to ensure we beat the browser's native jump
 					setTimeout(function () {
-						// Snap to the top of the page first
 						$('html, body').scrollTop(0);
 
-						// Smoothly animate down to the target
 						$('html, body').animate({
 							scrollTop: target.offset().top
 						}, 1500, 'swing');
@@ -59,25 +34,21 @@
 			});
 		}
 
-		// 4. Smooth scroll on Same-Page Click
 		$('#nav .links a').on('click', function (e) {
 			var fullHref = $(this).attr('href');
 			var targetPage = fullHref.split('#')[0];
 			var targetHash = '#' + fullHref.split('#')[1];
 
-			// If the link clicked belongs to the page we are CURRENTLY on
 			if (targetPage === currentPath && targetHash !== '#undefined') {
-				e.preventDefault(); // Stop the browser from reloading the page
+				e.preventDefault();
 
-				var targetElement = getScrollTarget(targetHash);
+				var targetElement = $('#content');
 
 				if (targetElement.length) {
-					// Smoothly scroll to the target
 					$('html, body').animate({
 						scrollTop: targetElement.offset().top
 					}, 1000, 'swing');
 
-					// Update the URL in the browser without causing a jump
 					if (history.pushState) {
 						history.pushState(null, null, targetHash);
 					}

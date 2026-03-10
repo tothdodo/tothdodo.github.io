@@ -4902,3 +4902,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 	}
 
 }
+
+#content {
+	height: 30px;
+}
